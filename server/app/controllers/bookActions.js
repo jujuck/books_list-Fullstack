@@ -5,7 +5,9 @@ const client = require("../../database/client");
 const browse = async (req, res, next) => {
   try {
     // Fetch all books from the database
-    const [books] = await client.query("SELECT * FROM book");
+    const [books] = await client.query(
+      "SELECT b.id, b.title, b.release_date, b.status_id, b.author,s.label FROM book as b INNER JOIN status as s ON s.id = b.status_id"
+    );
 
     // Respond with the books in JSON format
     res.status(200).json(books);
