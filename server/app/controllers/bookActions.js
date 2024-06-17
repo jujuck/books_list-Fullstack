@@ -4,11 +4,11 @@ const client = require("../../database/client");
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
-    // Fetch all items from the database
-    const items = await client.query("SELECT * FROM items");
+    // Fetch all books from the database
+    const [books] = await client.query("SELECT * FROM book");
 
-    // Respond with the items in JSON format
-    res.json(items);
+    // Respond with the books in JSON format
+    res.status(200).json(books);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
@@ -19,7 +19,7 @@ const browse = async (req, res, next) => {
 const read = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
-    const item = await client.query("SELECT * FROM items where id = ? ", [
+    const item = await client.query("SELECT * FROM book where id = ? ", [
       req.params.id,
     ]);
 
@@ -46,7 +46,7 @@ const add = async (req, res, next) => {
 
   try {
     // Insert the item into the database
-    const insertId = await client.query("INSERT INTO items(title) VALUES (?)", [
+    const insertId = await client.query("INSERT INTO books(title) VALUES (?)", [
       item.title,
     ]);
 
