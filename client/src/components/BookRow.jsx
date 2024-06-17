@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import "./BookRow.css";
 
-function BookRow({ book }) {
+function BookRow({ book, index }) {
   return (
-    <div className="row">
-      <h2>{book.title}</h2>
-      <h4>Auteur : {book.author}</h4>
-      <p>Date de parution : {book.release_date}</p>
-      <p>Statut: {book.label}</p>
+    <div className={`row ${index % 2 === 0 ? "light" : ""}`}>
+      <h2 className="col-3">{book.title}</h2>
+      <h4 className="col-2">{book.author}</h4>
+      <p className="col-2">{book.release_date}</p>
+      <p className="col-2">{book.label}</p>
     </div>
   );
 }
@@ -19,5 +19,6 @@ BookRow.propTypes = {
     release_date: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
   }).isRequired,
+  index: PropTypes.number.isRequired,
 };
 export default BookRow;

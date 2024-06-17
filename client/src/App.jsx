@@ -9,9 +9,15 @@ function App() {
   return (
     <main className="container">
       <h1>Ma liste de livres</h1>
-      <section>
-        {books.map((book) => (
-          <BookRow book={book} key={book.id} />
+      <section className="container table">
+        <div className="row">
+          <h5 className="col-3">Titre</h5>
+          <h5 className="col-2">Auteur</h5>
+          <h5 className="col-2">Date de parution</h5>
+          <h5 className="col-2">Statut</h5>
+        </div>
+        {books.map((book, index) => (
+          <BookRow book={book} key={book.id} index={index} />
         ))}
       </section>
     </main>
