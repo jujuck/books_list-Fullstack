@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     loader: async () => {
       try {
         const books = await connexion.get("/api/books");
-        return books;
+        return books.data;
       } catch (error) {
         throw new Error(error);
       }
