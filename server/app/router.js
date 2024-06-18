@@ -14,6 +14,8 @@ router.get("/books", bookActions.browse);
 
 router.get("/books/:id", bookActions.read);
 
+router.post("/books", bookActions.add);
+
 /* ************************************************************************* */
 
 module.exports = router;

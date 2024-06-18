@@ -22,7 +22,7 @@ const read = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
     const [item] = await client.query(
-      "SELECT b.id, b.title, b.description, b.author, b.release_date, s.label as status, sy.label as style FROM book as b INNER JOIN status as s ON s.id = b.status_id INNER JOIN style as sy ON sy.id = b.style_id WHERE b.id = ?",
+      `SELECT b.id, b.title, b.description, b.author, b.release_date, s.label as status, sy.label as style FROM book as b INNER JOIN status as s ON s.id = b.status_id INNER JOIN style as sy ON sy.id = b.style_id WHERE b.id = ?`,
       [req.params.id]
     );
 
@@ -31,7 +31,7 @@ const read = async (req, res, next) => {
     if (item == null) {
       res.sendStatus(404);
     } else {
-      res.status(200).json(item[0]);
+      res.status(200).json(item);
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware
@@ -45,16 +45,24 @@ const read = async (req, res, next) => {
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
   // Extract the item data from the request body
-  const item = req.body;
+  const book = req.body;
 
   try {
-    // Insert the item into the database
-    const insertId = await client.query("INSERT INTO books(title) VALUES (?)", [
-      item.title,
-    ]);
+    // Insert the book into the database
+    const insertId = await client.query(
+      "INSERT INTO book(title, description, author, release_date, style_id, status_id) VALUES (?, ?, ?, ?, ?, ?)",
+      [
+        book.title,
+        book.description,
+        book.author,
+        book.release_date,
+        book.style_id,
+        book.status_id,
+      ]
+    );
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted item
-    res.status(201).json({ insertId });
+    res.status(201).json({ id: insertId[0].insertId, ...req.body });
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
