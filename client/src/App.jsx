@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 
 import BookRow from "./components/BookRow";
+import AddBookForm from "./components/AddBookForm";
 import "./App.css";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <main className="container">
       <h1>Ma liste de livres</h1>
       <section className="container table">
+        <AddBookForm />
         <div className="row">
           <h5 className="col-3">Titre</h5>
           <h5 className="col-2">Auteur</h5>
