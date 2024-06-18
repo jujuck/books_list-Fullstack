@@ -1,5 +1,6 @@
 import { useState } from "react";
 import connexion from "../services/connexion";
+import Select from "./Form/Select";
 
 const initialBook = {
   title: "",
@@ -36,6 +37,7 @@ function AddBookForm() {
           type="text"
           value={book.title}
           name="title"
+          required
           onChange={(event) => handleBook(event)}
         />
       </label>
@@ -45,6 +47,7 @@ function AddBookForm() {
           type="text"
           value={book.description}
           onChange={(event) => handleBook(event)}
+          required
           name="description"
         />
       </label>
@@ -54,6 +57,7 @@ function AddBookForm() {
           type="text"
           value={book.author}
           onChange={(event) => handleBook(event)}
+          required
           name="author"
         />
       </label>
@@ -63,27 +67,12 @@ function AddBookForm() {
           type="text"
           value={book.release_date}
           onChange={(event) => handleBook(event)}
+          required
           name="release_date"
         />
       </label>
-      <label>
-        Style
-        <input
-          type="number"
-          value={book.style_id}
-          onChange={(event) => handleBook(event)}
-          name="style_id"
-        />
-      </label>
-      <label>
-        Statut
-        <input
-          type="number"
-          value={book.status_id}
-          onChange={(event) => handleBook(event)}
-          name="status_id"
-        />
-      </label>
+      <Select handleForm={handleBook} name="style_id" title="styles" />
+      <Select handleForm={handleBook} name="status_id" title="status" />
       <button type="submit">Ajouter</button>
     </form>
   );
