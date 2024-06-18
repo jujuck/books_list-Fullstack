@@ -21,16 +21,17 @@ const browse = async (req, res, next) => {
 const read = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
-    const item = await client.query("SELECT * FROM book where id = ? ", [
-      req.params.id,
-    ]);
+    const [item] = await client.query(
+      "SELECT b.id, b.title, b.description, b.author, b.release_date, s.label as status, sy.label as style FROM book as b INNER JOIN status as s ON s.id = b.status_id INNER JOIN style as sy ON sy.id = b.style_id WHERE b.id = ?",
+      [req.params.id]
+    );
 
     // If the item is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the item in JSON format
     if (item == null) {
       res.sendStatus(404);
     } else {
-      res.json(item);
+      res.status(200).json(item[0]);
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware

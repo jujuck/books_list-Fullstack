@@ -12,6 +12,8 @@ const bookActions = require("./controllers/bookActions");
 // Route to get a list of items
 router.get("/books", bookActions.browse);
 
+router.get("/books/:id", bookActions.read);
+
 /* ************************************************************************* */
 
 module.exports = router;
