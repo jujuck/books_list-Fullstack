@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
 import BookDetail from "./BookDetail";
+import connexion from "../services/connexion";
 import "./BookRow.css";
 
 const customStyles = {
@@ -20,6 +22,16 @@ Modal.setAppElement("#root");
 
 function BookRow({ book, index }) {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    try {
+      await connexion.delete(`/api/books/${book.id}`);
+      navigate(".", { replace: true });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className={`row ${index % 2 === 0 ? "light" : ""}`}>
@@ -34,6 +46,9 @@ function BookRow({ book, index }) {
           className="btn"
         >
           Plus
+        </button>
+        <button type="button" onClick={handleDelete} className="btn">
+          Supprimer
         </button>
       </div>
       <Modal

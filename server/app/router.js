@@ -18,6 +18,7 @@ router.get("/books/:id", bookActions.read);
 
 router.post("/books", bookActions.add);
 router.put("/books/:id", bookActions.edit);
+router.delete("/books/:id", bookActions.destroy);
 
 router.get("/styles", styleActions.browse);
 router.get("/status", statusActions.browse);
