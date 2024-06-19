@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import connexion from "../services/connexion";
 import Select from "./Form/Select";
 import "./AddBookForm.css";
@@ -14,6 +15,7 @@ const initialBook = {
 
 function AddBookForm() {
   const [book, setBook] = useState(initialBook);
+  const navigate = useNavigate();
 
   const handleBook = (event) => {
     setBook((prev) => ({ ...prev, [event.target.name]: event.target.value }));
@@ -24,6 +26,7 @@ function AddBookForm() {
 
     try {
       await connexion.post("/api/books", book);
+      navigate(".", { replace: true });
     } catch (error) {
       console.error(error);
     }

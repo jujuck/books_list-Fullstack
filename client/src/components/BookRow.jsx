@@ -8,9 +8,9 @@ const customStyles = {
   content: {
     top: "50%",
     left: "50%",
-    right: "10rem",
-    bottom: "10rem",
-    height: "80%",
+    right: "20rem",
+    bottom: "20rem",
+    height: "60%",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
   },

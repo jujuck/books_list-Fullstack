@@ -1,10 +1,25 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import connexion from "../services/connexion";
+import Select from "./Form/Select";
 import "./BookDetail.css";
 
 function BookDetail({ closeModal, id }) {
   const [book, setBook] = useState();
+
+  const updateBook = async (event) => {
+    const { value } = event.target;
+    try {
+      await connexion.put(`/api/books/${id}`, {
+        status_id: value,
+      });
+      const newBook = { ...book };
+      newBook.status_id = +value;
+      setBook(newBook);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const getBook = async () => {
@@ -32,7 +47,12 @@ function BookDetail({ closeModal, id }) {
             <li>Auteur: {book.author}</li>
             <li>Style: {book.style}</li>
           </ul>
-          <p>Statut: {book.status}</p>
+          <Select
+            handleForm={updateBook}
+            name="status_id"
+            title="status"
+            value={book.status_id}
+          />
         </div>
       )}
     </div>

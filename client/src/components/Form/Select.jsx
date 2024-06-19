@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import connexion from "../../services/connexion";
 
-function Select({ handleForm, title, name }) {
+function Select({ handleForm, title, name, value }) {
   const [selection, setSelection] = useState([]);
+
   useEffect(() => {
     const getSelection = async () => {
       try {
@@ -14,12 +15,12 @@ function Select({ handleForm, title, name }) {
       }
     };
     getSelection();
-  }, [title]);
+  }, [title, value]);
 
   return (
     <label>
       {title}
-      <select name={name} onChange={handleForm}>
+      <select name={name} onChange={handleForm} required value={value}>
         {selection.map((select) => (
           <option key={select.id} value={select.id}>
             {select.label}
@@ -34,6 +35,7 @@ Select.propTypes = {
   handleForm: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default Select;

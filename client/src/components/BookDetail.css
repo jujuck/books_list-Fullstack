@@ -1,11 +1,6 @@
 .modal {
   padding: 2rem;
-
-  button {
-    background-color: black;
-    padding: 0.2rem 1rem;
-    color: white;
-  }
+  background-color: blue;
 
   h2 {
     text-align: center;

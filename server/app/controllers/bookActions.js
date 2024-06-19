@@ -22,7 +22,7 @@ const read = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
     const [item] = await client.query(
-      `SELECT b.id, b.title, b.description, b.author, b.release_date, s.label as status, sy.label as style FROM book as b INNER JOIN status as s ON s.id = b.status_id INNER JOIN style as sy ON sy.id = b.style_id WHERE b.id = ?`,
+      `SELECT b.id, b.title, b.description, b.author, b.release_date, b.status_id, s.label as status, sy.label as style FROM book as b INNER JOIN status as s ON s.id = b.status_id INNER JOIN style as sy ON sy.id = b.style_id WHERE b.id = ?`,
       [req.params.id]
     );
 
@@ -41,6 +41,27 @@ const read = async (req, res, next) => {
 
 // The E of BREAD - Edit (Update) operation
 // This operation is not yet implemented
+
+const edit = async (req, res, next) => {
+  try {
+    // Fetch a specific item from the database based on the provided ID
+    const item = await client.query(
+      `UPDATE book SET status_id = ? WHERE id = ?;`,
+      [req.body.status_id, req.params.id]
+    );
+
+    // If the item is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the item in JSON format
+    if (item[0].affectedRows === 0) {
+      res.sendStatus(406);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
@@ -76,7 +97,7 @@ const add = async (req, res, next) => {
 module.exports = {
   browse,
   read,
-  // edit,
+  edit,
   add,
   // destroy,
 };
