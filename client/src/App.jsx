@@ -17,6 +17,7 @@ function App() {
           <h5 className="col-2">Auteur</h5>
           <h5 className="col-2">Date de parution</h5>
           <h5 className="col-2">Statut</h5>
+          <h5 className="col-2">Actions</h5>
         </div>
         {books.map((book, index) => (
           <BookRow book={book} key={book.id} index={index} />

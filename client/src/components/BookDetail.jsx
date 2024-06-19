@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import connexion from "../services/connexion";
+import "./BookDetail.css";
 
 function BookDetail({ closeModal, id }) {
   const [book, setBook] = useState();
@@ -18,9 +19,9 @@ function BookDetail({ closeModal, id }) {
   }, [id]);
 
   return (
-    <>
-      <button type="button" onClick={() => closeModal()}>
-        close
+    <div className="modal">
+      <button type="button" onClick={() => closeModal()} className="btn">
+        Fermer
       </button>
       {book && (
         <div>
@@ -28,13 +29,13 @@ function BookDetail({ closeModal, id }) {
           <p>Synopsis: {book.description}</p>
           <ul>
             <li>Parution: {book.release_date}</li>
-            <li>Status: {book.status}</li>
-            <li>Style: {book.style}</li>
             <li>Auteur: {book.author}</li>
+            <li>Style: {book.style}</li>
           </ul>
+          <p>Statut: {book.status}</p>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

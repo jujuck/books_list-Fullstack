@@ -31,7 +31,7 @@ const read = async (req, res, next) => {
     if (item == null) {
       res.sendStatus(404);
     } else {
-      res.status(200).json(item);
+      res.status(200).json(item[0]);
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware

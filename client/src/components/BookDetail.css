@@ -1,0 +1,26 @@
+.modal {
+  padding: 2rem;
+
+  button {
+    background-color: black;
+    padding: 0.2rem 1rem;
+    color: white;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  p {
+    padding: 0.2rem 0;
+    font-weight: 600;
+  }
+
+  ul {
+    margin: 0.2rem;
+
+    li {
+      list-style: none;
+    }
+  }
+}

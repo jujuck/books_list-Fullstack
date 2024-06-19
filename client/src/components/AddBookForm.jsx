@@ -1,6 +1,7 @@
 import { useState } from "react";
 import connexion from "../services/connexion";
 import Select from "./Form/Select";
+import "./AddBookForm.css";
 
 const initialBook = {
   title: "",
@@ -29,52 +30,56 @@ function AddBookForm() {
   };
 
   return (
-    <form onSubmit={handleForm}>
-      Ajouter votre livre
-      <label>
-        Titre
-        <input
-          type="text"
-          value={book.title}
-          name="title"
-          required
-          onChange={(event) => handleBook(event)}
-        />
-      </label>
-      <label>
-        Description
-        <input
-          type="text"
-          value={book.description}
-          onChange={(event) => handleBook(event)}
-          required
-          name="description"
-        />
-      </label>
-      <label>
-        Auteur
-        <input
-          type="text"
-          value={book.author}
-          onChange={(event) => handleBook(event)}
-          required
-          name="author"
-        />
-      </label>
-      <label>
-        Parution
-        <input
-          type="text"
-          value={book.release_date}
-          onChange={(event) => handleBook(event)}
-          required
-          name="release_date"
-        />
-      </label>
-      <Select handleForm={handleBook} name="style_id" title="styles" />
-      <Select handleForm={handleBook} name="status_id" title="status" />
-      <button type="submit">Ajouter</button>
-    </form>
+    <section>
+      <h3>Ajouter votre livre</h3>
+      <form onSubmit={handleForm} className="form">
+        <label>
+          Titre
+          <input
+            type="text"
+            value={book.title}
+            name="title"
+            required
+            onChange={(event) => handleBook(event)}
+          />
+        </label>
+        <label>
+          Description
+          <input
+            type="text"
+            value={book.description}
+            onChange={(event) => handleBook(event)}
+            required
+            name="description"
+          />
+        </label>
+        <label>
+          Auteur
+          <input
+            type="text"
+            value={book.author}
+            onChange={(event) => handleBook(event)}
+            required
+            name="author"
+          />
+        </label>
+        <label>
+          Parution
+          <input
+            type="text"
+            value={book.release_date}
+            onChange={(event) => handleBook(event)}
+            required
+            name="release_date"
+          />
+        </label>
+        <Select handleForm={handleBook} name="style_id" title="styles" />
+        <Select handleForm={handleBook} name="status_id" title="status" />
+        <button type="submit" className="btn">
+          Ajouter
+        </button>
+      </form>
+    </section>
   );
 }
 

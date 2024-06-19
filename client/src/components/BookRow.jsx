@@ -8,8 +8,9 @@ const customStyles = {
   content: {
     top: "50%",
     left: "50%",
-    right: "auto",
-    bottom: "auto",
+    right: "10rem",
+    bottom: "10rem",
+    height: "80%",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
   },
@@ -27,7 +28,11 @@ function BookRow({ book, index }) {
       <p className="col-2">{book.release_date}</p>
       <p className="col-2">{book.label}</p>
       <div className="col-2">
-        <button type="button" onClick={() => setIsOpen(!modalIsOpen)}>
+        <button
+          type="button"
+          onClick={() => setIsOpen(!modalIsOpen)}
+          className="btn"
+        >
           Plus
         </button>
       </div>
